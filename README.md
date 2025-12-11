@@ -1,4 +1,4 @@
-# VEKO — Delivery Robot  
+# VEKO 
 
 **VEKO** is a small-scale delivery robot designed to transport light items (payload up to 1 kg) within an indoor workspace — ideal for shifting tools or small items between rooms without interrupting workflow.
 
