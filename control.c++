@@ -64,7 +64,7 @@ void loop() {
     unsigned long remaining = (lockoutEndTime - millis()) / 1000;
     if (bluetoothSerial.available()) {
       bluetoothSerial.read(); // Discard input
-      bluetoothSerial.print("🚫 Locked out. Wait ");
+      bluetoothSerial.print("Locked out. Wait ");
       bluetoothSerial.print(remaining);
       bluetoothSerial.println(" seconds");
     }
@@ -106,7 +106,7 @@ void loop() {
         bluetoothSerial.print(inputPasscode.length());
         bluetoothSerial.println(" digits entered");
       } else {
-        bluetoothSerial.println("⚠️ Max length reached. Press '#'");
+        bluetoothSerial.println(" Max length reached. Press '#'");
       }
     }
     else if (command == '#') {
@@ -114,7 +114,7 @@ void loop() {
     }
     else if (command == '*') { // Clear input
       inputPasscode = "";
-      bluetoothSerial.println("🔄 Input cleared");
+      bluetoothSerial.println("Input cleared");
     }
   }
 }
@@ -133,13 +133,13 @@ bool isLockedOut() {
 
 void checkPasscode() {
   if (inputPasscode.length() == 0) {
-    bluetoothSerial.println("⚠️ No input entered");
+    bluetoothSerial.println("No input entered");
     inputPasscode = "";
     return;
   }
   
   if (inputPasscode == correctPasscode) {
-    bluetoothSerial.println("✅ Access Granted");
+    bluetoothSerial.println("Access Granted");
 
 bluetoothSerial.println("Controls: F=Forward, B=Back, L=Left, R=Right, S=Stop");
     bluetoothSerial.println("Speed: +=Faster, -=Slower");
@@ -150,7 +150,7 @@ bluetoothSerial.println("Controls: F=Forward, B=Back, L=Left, R=Right, S=Stop");
     lastActivityTime = millis();
   } else {
     failedAttempts++;
-    bluetoothSerial.print("❌ Wrong Passcode (");
+    bluetoothSerial.print("Wrong Passcode (");
     bluetoothSerial.print(failedAttempts);
     bluetoothSerial.print("/");
     bluetoothSerial.print(maxAttempts);
@@ -158,7 +158,7 @@ bluetoothSerial.println("Controls: F=Forward, B=Back, L=Left, R=Right, S=Stop");
     
     if (failedAttempts >= maxAttempts) {
       lockoutEndTime = millis() + lockoutDuration;
-      bluetoothSerial.println("🚫 Too many attempts! Locked for 30s");
+      bluetoothSerial.println("Too many attempts! Locked for 30s");
     }
     
     accessGranted = false;
@@ -168,7 +168,7 @@ bluetoothSerial.println("Controls: F=Forward, B=Back, L=Left, R=Right, S=Stop");
 }
 
 void lockSystem() {
-  bluetoothSerial.println("🔒 System Locked");
+  bluetoothSerial.println("System Locked");
   accessGranted = false;
   failedAttempts = 0;
   inputPasscode = "";
@@ -177,7 +177,7 @@ void lockSystem() {
 }
 
 void unlockServo() {
-  bluetoothSerial.println("🔓 Unlocking...");
+  bluetoothSerial.println("Unlocking...");
   lockServo.write(openPos);
   delay(500);
 }
@@ -206,7 +206,7 @@ void increaseSpeed() {
 void decreaseSpeed() {
   if (motorSpeed > minSpeed) {
     motorSpeed = max(motorSpeed - 50, minSpeed);
-    bluetoothSerial.print("🐌 Speed: ");
+    bluetoothSerial.print("Speed: ");
     bluetoothSerial.print((motorSpeed * 100) / 255);
     bluetoothSerial.println("%");
   }
