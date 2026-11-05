@@ -197,7 +197,7 @@ void sendStatus() {
 void increaseSpeed() {
   if (motorSpeed < maxSpeed) {
     motorSpeed = min(motorSpeed + 50, maxSpeed);
-    bluetoothSerial.print("⚡ Speed: ");
+    bluetoothSerial.print("Speed: ");
     bluetoothSerial.print((motorSpeed * 100) / 255);
     bluetoothSerial.println("%");
   }
