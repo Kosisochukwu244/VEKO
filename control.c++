@@ -1,3 +1,4 @@
+// ensure to install necessary motor libraries before using code 
 #include <AFMotor.h>
 #include <SoftwareSerial.h>
 #include <Servo.h>
